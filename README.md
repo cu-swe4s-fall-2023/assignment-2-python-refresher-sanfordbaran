@@ -9,3 +9,5 @@ print_fires:    correctly call the get_column() function
 my_utils.py:    improve get_column() to use a named argument for the result_column that defaults to 1
 
 print_fires:    update to correctly use the new get_column function
+
+print_fires     update to use argpase to collect the 4 inputs to the get_column function via the command line
