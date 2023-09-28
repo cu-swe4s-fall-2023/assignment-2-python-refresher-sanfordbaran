@@ -1,6 +1,7 @@
 import my_utils as mu
 import argparse as ap
 
+
 def get_args():
     parser = ap.ArgumentParser(description='Command Line parser written in python',
                                 prog = 'print_fires')
@@ -28,13 +29,20 @@ def get_args():
     return parser.parse_args()
 
 
-args = get_args()
 
-file_name = args.f
-country_column = args.cc
-country= args.c
-fires_column = args.fc
 
-fires = mu.get_column(file_name, country_column, country, result_column=fires_column)
-print(fires)
+def main():
+    args = get_args()
+
+    file_name = args.f
+    country_column = args.cc
+    country= args.c
+    fires_column = args.fc
+
+    fires = mu.get_column(file_name, country_column, country, result_column=fires_column)
+    print(fires)
+
+
+if __name__ == '__main__':
+    main()
 
