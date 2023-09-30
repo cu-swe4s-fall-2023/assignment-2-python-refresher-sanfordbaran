@@ -20,3 +20,5 @@ my_utils.py:
 my_utils.py:    added Exception Handling and Exit return codes
 
 my_utils.py:    fully documented the function get_column
+
+my_utils.py     Add the new functions mean(), median() and standard_deviation()
