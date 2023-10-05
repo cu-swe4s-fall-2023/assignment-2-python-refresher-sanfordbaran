@@ -28,25 +28,19 @@ def get_column(file_name, query_column, query_value, result_column=4):
 
     try:
         f = open(file_name, 'r')
-    except FileNotFoundError:
-        print(f'FileNotFoundError:  {file_name}') 
-        sys.exit(1)
+    except FileNotFoundError as fnf_error:
+        print(f'File Not Found Error: {file_name}')
     else:   
         for line in f:
             items = line.strip().split(',')  
 
             try:
                 country_col_value = items[query_column - 1]
-            except IndexError:
-                print(f'The Country Column index is out of range: {query_column}')
-                sys.exit(1) 
-                
-                
-            try:
                 result_col_value = items[result_column - 1]
-            except IndexError:
-                print(f'The Fire Column index is out of range: {result_column}')
-                sys.exit(1)
+            except IndexError as ie:
+                print(ie)
+                f.close()
+                return forest_fires
                
                 
             # for all the rows that are of the specified country....  
@@ -55,15 +49,16 @@ def get_column(file_name, query_column, query_value, result_column=4):
                 # convert string representation of a float, then to an int 
                 try:
                     int_fire_metric = int(float(result_col_value)) 
-                except ValueError:
-                    print(f'Could not convert value to an int: Trying to convert value {result_col_value}')
-                    sys.exit(1)
-
-                forest_fires.append(int_fire_metric)
+                except ValueError as ve:
+                    print(ve)
+                    f.close()
+                    return forest_fires
+                else:
+                    forest_fires.append(int_fire_metric)
 
 
         f.close()  
-            
+      
     return forest_fires
 
 
@@ -105,7 +100,7 @@ def median(list_of_ints):
 
 def standard_deviation(list_of_ints):
     """
-    Gets the standard deviiation of a list of integers (using numpy)
+    Gets the standard deviation of a list of integers (using numpy)
 
     Parameters
     ----------

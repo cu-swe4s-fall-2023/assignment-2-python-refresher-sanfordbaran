@@ -1,5 +1,6 @@
 import my_utils as mu
 import argparse as ap
+import sys
 
 
 def get_args():
@@ -41,7 +42,9 @@ def main():
 
     fires = mu.get_column(file_name, country_column, country, result_column=fires_column)
     print(fires)
-
+    
+    if fires == []:
+        sys.exit(1)
 
 if __name__ == '__main__':
     main()
