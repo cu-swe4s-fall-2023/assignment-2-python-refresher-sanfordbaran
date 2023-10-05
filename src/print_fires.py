@@ -44,8 +44,11 @@ def main():
     country_column = args.cc
     country= args.c
     fires_column = args.fc
-
-    fires = mu.get_column(file_name, country_column, country, result_column=fires_column)
+    
+    if fires_column == None:
+        fires = mu.get_column(file_name, country_column, country)
+    else:
+        fires = mu.get_column(file_name, country_column, country, result_column=fires_column)
     
     if args.op == 'mean':
         print(mu.mean(fires))
