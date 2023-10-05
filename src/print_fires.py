@@ -25,7 +25,12 @@ def get_args():
     parser.add_argument('--fc',
                        type = int,
                        help='Fires Column',
-                       required=True)
+                       required=False)
+    
+    parser.add_argument('--op',
+                       type = str,
+                       help='Operation to Return',
+                       required=False)
     
     return parser.parse_args()
 
@@ -41,7 +46,15 @@ def main():
     fires_column = args.fc
 
     fires = mu.get_column(file_name, country_column, country, result_column=fires_column)
-    print(fires)
+    
+    if args.op == 'mean':
+        print(mu.mean(fires))
+    elif args.op == 'median':
+        print(mu.median(fires))
+    elif args.op == 'std':
+        print(mu.standard_deviation(fires))
+    else:
+        print(fires)
     
     if fires == []:
         sys.exit(1)
