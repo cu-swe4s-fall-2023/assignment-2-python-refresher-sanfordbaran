@@ -9,39 +9,56 @@ import os
 
 
 class TestMyUtils(unittest.TestCase):
+       
+    def setUp(self):
+        print()
+        print()
+        self.country = random.choice(['Australia', 'Brazil', 'China', 'Greece', 'Japan', 'United States of America'])
+        self.forest_fires_results = my_utils.get_column('src/Agrofood_co2_emission.csv', 1, self.country, 4)
+        self.mean_result = np.mean(self.forest_fires_results)
+        self.median_result = np.median(self.forest_fires_results)
+        self.sd_result = np.std(self.forest_fires_results)
+        
+        print(self.country)
+        #print('=======================')
+        #print()
     
-    @classmethod
-    def setUpClass(cls):
-        cls.usa_result = [1999, 1999, 1999, 1999, 1999, 1999, 3286, 1553, 3099, 3578, 3687, 534, 1475, 1224, 1201, 915, 1086, 1558, 2068, 1093, 912, 1330, 1173, 1284, 1336, 2235, 1438, 2664, 2457, 1190, 5405]
-        print('start')
-        print('================')
-    
-    def test_get_column_success_1(self):
-        self.assertEqual(my_utils.get_column('src/Agrofood_co2_emission.csv', 1, 'United States of America', 4), self.usa_result)    
-
-    def test_get_column_success_2(self):
-        self.assertEqual(my_utils.get_column('src/Agrofood_co2_emission.csv', 1, 'United States of America'), self.usa_result)    
+    def test_get_column_success(self):
+        print('test_get_column_success')
+        print()
+        self.assertEqual(my_utils.get_column('src/Agrofood_co2_emission.csv', 1, self.country, 4), self.forest_fires_results)    
+        self.assertEqual(my_utils.get_column('src/Agrofood_co2_emission.csv', 1, self.country), self.forest_fires_results)    
 
     def test_get_column_no_such_file_failure(self):
-        self.assertEqual(my_utils.get_column('src/Agrofood_co2_emissions.csv', 1, 'United States of America', 4), [])
+        print('test_get_column_no_such_file_failure')
+        print()
+        self.assertEqual(my_utils.get_column('src/Agrofood_co2_emissions.csv', 1, self.country, 4), [])
            
-    def test_get_column_index_failure_1(self):
-        self.assertEqual(my_utils.get_column('src/Agrofood_co2_emission.csv', 1, 'United States of America', 400), [])
-        
-    def test_get_column_index_failure_2(self):
-        self.assertEqual(my_utils.get_column('src/Agrofood_co2_emission.csv', 400, 'United States of America', 4), [])
+    def test_get_column_index_failure(self):
+        print('test_get_column_index_failure')
+        print()
+        self.assertEqual(my_utils.get_column('src/Agrofood_co2_emission.csv', 1, self.country, 400), [])
+        self.assertEqual(my_utils.get_column('src/Agrofood_co2_emission.csv', 400, self.country, 4), [])
 
     def test_get_column_can_not_convert_to_int_failure(self):
-        self.assertEqual(my_utils.get_column('src/Agrofood_co2_emission.csv', 1, 'United States of America', 1), [])
+        print('test_get_column_can_not_convert_to_int_failure')
+        print()
+        self.assertEqual(my_utils.get_column('src/Agrofood_co2_emission.csv', 1, self.country, 1), [])
         
     def test_mean(self):
-        self.assertEqual(my_utils.mean(self.usa_result), np.mean(self.usa_result))
+        print('test_mean')
+        print()
+        self.assertEqual(my_utils.mean(self.forest_fires_results), self.mean_result)
     
     def test_median(self):
-        self.assertEqual(my_utils.median(self.usa_result), np.median(self.usa_result))
+        print('test_median')
+        print()
+        self.assertEqual(my_utils.median(self.forest_fires_results), self.median_result)
         
     def test_standard_deviation(self):
-        self.assertEqual(my_utils.standard_deviation(self.usa_result),np.std(self.usa_result))
+        print('test_standard_deviation')
+        print()
+        self.assertEqual(my_utils.standard_deviation(self.forest_fires_results),self.sd_result)
     
     
 if __name__ == '__main__':

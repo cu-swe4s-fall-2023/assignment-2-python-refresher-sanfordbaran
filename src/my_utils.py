@@ -56,9 +56,8 @@ def get_column(file_name, query_column, query_value, result_column=4):
                 else:
                     forest_fires.append(int_fire_metric)
 
-
         f.close()  
-      
+     
     return forest_fires
 
 
