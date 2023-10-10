@@ -16,7 +16,7 @@ class TestMyUtils(unittest.TestCase):
         self.country = random.choice(['Australia', 'Brazil', 'China',
                                       'Greece', 'Japan',
                                       'United States of America'])
-        self.filename = '../../src/Agrofood_co2_emission.csv'
+        self.filename = '../data/Agrofood_co2_emission_ft.csv'
         self.ff_results = my_utils.get_column(self.filename, 1,
                                               self.country, 4)
         self.bad_filename = '../../src/Agrofood_co2_emissions.csv'
