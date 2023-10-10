@@ -8,7 +8,8 @@ To just do a bash run from src:
     
     
 To run the unit tests:
-    python test/unit/test_my_utils.py
+    cd test/unit
+    python -m unittest test_my_utils.py
     
     
 To run the functional tests:
