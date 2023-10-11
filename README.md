@@ -71,6 +71,9 @@
 16. environment.yml
 > Add this environment file used in the contiunous integration workflow
 
+17. tests_and_checks.yml
+> Remove the pull-request event, so that this can happen if you get a pycodestyle failure
+
 
 
 

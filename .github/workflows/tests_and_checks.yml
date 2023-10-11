@@ -3,8 +3,6 @@ name: Tests_and_Checks
 on:
   push:
     branches: [ ci ]
-  pull_request:
-    branches: [ master ]
     
 jobs:
   run_unit_tests:          
