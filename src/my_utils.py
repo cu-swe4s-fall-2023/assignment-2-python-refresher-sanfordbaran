@@ -4,7 +4,7 @@ import numpy as np
 
 def get_column(file_name, query_column, query_value, result_column=4):
     """
-    Retrieves Forest Fire data given a particular country 
+    Retrieves Forest Fire data given a particular country
 
     Parameters
     ----------
@@ -15,24 +15,26 @@ def get_column(file_name, query_column, query_value, result_column=4):
     query_value : str
         The name of the country whose fire data you want
     result_column
-        The column number that contains the fire data (from year 1990 through 2020) for all countries
+        The column number that contains the fire data \
+        (from year 1990 through 2020) for all countries
 
     Returns
     -------
     list
-        a list of ints that contains the fire data metric for each recorded year (from year 1990 through 2020) for the specified country
-    """      
-    
+        a list of ints that contains the fire data metric \
+        for each recorded year (from year 1990 through 2020) \
+        for the specified country
+    """
+
     forest_fires = []
-    
 
     try:
         f = open(file_name, 'r')
     except FileNotFoundError as fnf_error:
         print(f'File Not Found Error: {file_name}')
-    else:   
+    else:
         for line in f:
-            items = line.strip().split(',')  
+            items = line.strip().split(',')
 
             try:
                 country_col_value = items[query_column - 1]
@@ -41,14 +43,13 @@ def get_column(file_name, query_column, query_value, result_column=4):
                 print(ie)
                 f.close()
                 return forest_fires
-               
-                
-            # for all the rows that are of the specified country....  
+
+            # for all the rows that are of the specified country....
             if country_col_value == query_value:
 
-                # convert string representation of a float, then to an int 
+                # convert string representation of a float, then to an int
                 try:
-                    int_fire_metric = int(float(result_col_value)) 
+                    int_fire_metric = int(float(result_col_value))
                 except ValueError as ve:
                     print(ve)
                     f.close()
@@ -56,8 +57,8 @@ def get_column(file_name, query_column, query_value, result_column=4):
                 else:
                     forest_fires.append(int_fire_metric)
 
-        f.close()  
-     
+        f.close()
+
     return forest_fires
 
 
@@ -74,9 +75,8 @@ def mean(list_of_ints):
     -------
     mean : float
         The mean of the inputted list of integers
-    """        
+    """
     return np.mean(list_of_ints)
-
 
 
 def median(list_of_ints):
@@ -92,9 +92,8 @@ def median(list_of_ints):
     -------
     median : float
         The median of the inputted list of integers
-    """ 
+    """
     return np.median(list_of_ints)
-
 
 
 def standard_deviation(list_of_ints):
@@ -110,15 +109,14 @@ def standard_deviation(list_of_ints):
     -------
     standard deviation : float
         The standard deviation of the inputted list of integers
-    """ 
+    """
     return np.std(list_of_ints)
-
-
 
 
 def main():
     """
-    Makes sure that all of the functions: get_column(), mean(), median(), and standard_deviation() run
+    Makes sure that all of the functions: get_column(), mean(), \
+    median(), and standard_deviation() run correctly
 
     Parameters
     ----------
@@ -127,16 +125,17 @@ def main():
     Returns
     -------
     nothing
-    """ 
-    
+    """
+
     file_name = 'Agrofood_co2_emission.csv'
     country_column = 1
     country = 'United States of America'
     fires_column = 4
-    
+
     print(f'Here are the fire metrics for {country}')
 
-    fires = get_column(file_name, country_column, country, result_column=fires_column)
+    fires = get_column(file_name, country_column,
+                       country, result_column=fires_column)
     print(fires)
     print()
     print(f'Forest Fires Mean: {mean(fires)}')
@@ -144,9 +143,7 @@ def main():
     print(f'Forest Fires Median: {median(fires)}')
     print()
     print(f'Forest Fires Standard Deviation: {standard_deviation(fires)}')
-    
-    
+
 
 if __name__ == '__main__':
     main()
-    
